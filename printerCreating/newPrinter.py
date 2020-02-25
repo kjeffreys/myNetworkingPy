@@ -12,6 +12,24 @@ class Printer:
         self.room = room
         self.ip = ip
 
-class EldPrinter(self):
+class EldPrinter(Printer):
     
-    def make()
+    def __init__(self, model, room, ip):
+        Printer.__init__(self, 'Eld', 'HPm402', '90', '10.247.56.')
+        self.model = model
+        self.room = room
+        self.ip = '10.247.56.' + ip
+        self.name = self.school.upper() + '-' + self.model + '-' + self.room
+
+newPrinter = EldPrinter('m402', '200','100')
+print('Print newPrinter call: {}'.format(newPrinter))
+print()
+for el in dir(newPrinter):
+    if not el.startswith('__'):
+        print(el)
+print('New Printer name in caps: {}'.format(newPrinter.name))
+print('New printer ip: {}'.format(newPrinter.ip))
+
+
+
+
