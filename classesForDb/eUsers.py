@@ -1,4 +1,4 @@
-class Euser:    #General superclass
+class User:    #General superclass
     '''
     Attributes go first
     '''
@@ -6,6 +6,13 @@ class Euser:    #General superclass
     '''
     Methods below
     '''
+    def __init__(self):
+        self.fName = ' '
+        self.lName = ' '
+        self.password = ' '
+        self.context = ' '
+        self.template = ' '
+        self.volume = ' '
     
     def createUser(self):
         print("createUser()")

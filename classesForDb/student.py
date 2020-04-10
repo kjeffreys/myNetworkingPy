@@ -1,6 +1,13 @@
+import eUsers
 
-class Student:
+class Student(eUsers.User):
 
+    def __init__(self):
+        super.(self).__init__()
+        self.grade = ' '
+        self.gradeCode = ' '
+        self.lunchID = ' '
+'''
     def __init__(User):
         print("Student created")
         self.fname = " "
@@ -69,6 +76,6 @@ class Student:
 
     def setVolume(self, volume):
         self.volume = volume
-
+'''
         
 
