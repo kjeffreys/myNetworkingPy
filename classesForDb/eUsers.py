@@ -13,6 +13,7 @@ class User:    #General superclass
         self.context = ' '
         self.template = ' '
         self.volume = ' '
+        self.homeDir = ' '
     
     def createUser(self):
         print("createUser()")
@@ -53,9 +54,14 @@ class User:    #General superclass
         # Need to map accurately for all or do manually with pyautogui
         # Need to map grade attr also if student.
         # Need to map several other permission templates for admins
+    
+    def getPassword(self):
+        return self.password
 
     def setPassword(self):
         print("setPassword()")
 
+    def getHomeDir(self):
+        return self.homeDir
     def setHomeDir(self):
         print("setHomeDir()")

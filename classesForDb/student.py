@@ -3,47 +3,10 @@ import eUsers
 class Student(eUsers.User):
 
     def __init__(self):
-        super.(self).__init__()
+        eUsers.User.__init__(self)
         self.grade = ' '
         self.gradeCode = ' '
         self.lunchID = ' '
-'''
-    def __init__(User):
-        print("Student created")
-        self.fname = " "
-        self.lname = " "
-        self.fullname = " "
-        self.username = " "
-        self.lunchID = " "
-        self.pw = " "
-        self.grade = " "
-        self.gradeCode = " "
-        self.context = " "
-        self.volume = " "
-
-    def getFname(self):
-        return self.fname
-
-    def setFname(self, name):
-        self.fname = name
-
-    def getLname(self):
-        return self.lname
-        
-    def setLname(self, name):
-        self.lname = name
-
-    def getFullname(self):
-        return self.fullname
-        
-    def setFullname(self, name):
-        self.fullname = name
-
-    def getUsername(self):
-        return self.username
-        
-    def setUsername(self, name):
-        self.username = name
 
     def getLunchID(self):
         return self.lunchID
@@ -76,6 +39,6 @@ class Student(eUsers.User):
 
     def setVolume(self, volume):
         self.volume = volume
-'''
+
         
 
