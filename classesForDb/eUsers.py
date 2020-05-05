@@ -9,6 +9,7 @@ class User:    #General superclass
     def __init__(self):
         self.fName = ' '
         self.lName = ' '
+        self.username = ' '
         self.password = ' '
         self.context = ' '
         self.template = ' '
@@ -39,10 +40,12 @@ class User:    #General superclass
     def setUsername(self):
         print("setUsername()")
 
-    def setFirstName(self):
+    def setFirstName(self, name):
+        self.fName = name
         print("setFirstName()")
 
-    def setLastName(self):
+    def setLastName(self, name):
+        self.lName = name
         print("setLastName()")
 
     def setContext(self):
@@ -58,10 +61,19 @@ class User:    #General superclass
     def getPassword(self):
         return self.password
 
-    def setPassword(self):
+    def setPassword(self, password):
+        self.password = str(password)
         print("setPassword()")
 
     def getHomeDir(self):
         return self.homeDir
     def setHomeDir(self):
         print("setHomeDir()")
+    
+    def pt(self):
+        print("Username:\t{}".format(self.username))
+        print("First name:\t{}".format(self.fName))
+        print("Last name:\t{}".format(self.lName))
+        print("Password:\t{}".format(self.password))
+
+

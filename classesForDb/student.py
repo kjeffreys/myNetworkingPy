@@ -28,17 +28,14 @@ class Student(eUsers.User):
         gradeDict = {'K': '32', '1':'31', '2':'30', '3':'29', '4':'28','5':'27', '6':'26', '7':'25', '8':'24'}
         self.gradeCode = gradeDict['grade']
 
-    def getContext(self):
-        return self.context
-
-    def setContext(self, context):
-        self.context = context
-
-    def getVolume(self):
-        return self.volume
-
-    def setVolume(self, volume):
-        self.volume = volume
+    def setParsedName(self, name, pw):
+        parsed = name.split()
+        self.fName = parsed[0]
+        self.lName = parsed[-1]
+        self.password = pw
+        username = parsed[0][0].upper() + parsed[-1][0].upper() + pw
+        self.username = username
+        print("setParsedName()")
 
         
 
