@@ -97,11 +97,11 @@ def notPrimary(obj):
 
     time.sleep(.5)
 
-    # copyTemp Checkbox (264, 560)
+    # templ Checkbox (264, 560)
     pawg.click(264, 560)
-    # copyTemp TextBox(411, 587)
+    # templ TextBox(411, 587)
     pawg.click(411, 587)
-
+    template = getTemplate(grade)
     time.sleep(60)
 
     return 0
@@ -139,6 +139,27 @@ def getContext(grade):
     }
 
     return contextDict[gC]
+
+def getTemplate(grade):
+    '''
+    gC = getGradeCode(grade)
+    templateDict = {
+        '32': 'User_Template.32.Primary.Students.eUsers.ERCSD',
+
+        '23': 'User_Template.23.RHS.Students.eUsers.ERCSD'
+    }
+    '''
+    # B/c template autofills another field, it is not ideal to enter the text
+    # But the selection of objects is off screen, so instead, implementing click and drag selection
+    # of objects needed
+
+    # position of hz scroll bar (407, 718)
+    pawg.moveTo(407,718)
+    # drag screen to see search button
+    pawg.drag(100, 0, .5)
+    # click search button (590, 585)
+    pawg.click(590, 585)
+
 
 def processRows(df=students):
     for i in range(len(df.index)):
