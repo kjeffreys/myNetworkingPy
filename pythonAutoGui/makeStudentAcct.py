@@ -40,7 +40,66 @@ def templatecheckboxClick():
     pawg.click(x, y)
 
 def isPrimary():
-    pawg.click(x, y)
+    # get user's full name from obj
+    name = obj['STUDENT'].split()
+    lunchId = obj['ID']
+    grade = obj['GRADE']
+    # get fname
+    fname = name[0]
+    # get lname
+    lname = name[1:]
+    print(lname)
+    print(len(lname))
+    # create username
+    print(fname[0])
+    print(lname[0])
+    print(lname[0][0])
+    print(lunchId)
+    uname = fname[0] + lname[0][0] + lunchId
+
+    # insert username
+    usernameClick()
+    pawg.write(uname)
+
+    time.sleep(.5)
+
+    # insert fname
+    fnameClick()
+    pawg.write(fname)
+
+    time.sleep(.5)
+    
+    # insert lname
+    lnameClick()
+    pawg.write(("").join(lname))
+
+    time.sleep(.5)
+
+    # insert Context
+    pawg.click(396,357)
+    contextStr = getContext(grade)
+    pawg.write(contextStr)
+
+    time.sleep(.5)
+
+    # insert pw: (391, 396)
+    pawg.click(391, 396)
+    pawg.write('1')
+
+    time.sleep('1')
+
+    # click retype: (395, 423)
+    pawg.click(395, 423)
+    pawg.write(lunchId)
+
+    time.sleep(.5)
+
+    # templ Checkbox (264, 560)
+    pawg.click(264, 560)
+    # templ TextBox(411, 587)
+    pawg.click(411, 587)
+    template = getTemplate(grade)
+
 
 def notPrimary(obj):
     # get user's full name from obj
@@ -102,9 +161,8 @@ def notPrimary(obj):
     # templ TextBox(411, 587)
     pawg.click(411, 587)
     template = getTemplate(grade)
-    time.sleep(60)
+    time.sleep(5)
 
-    return 0
 
     
 def getGradeCode(grade):
@@ -118,7 +176,7 @@ def getGradeCode(grade):
         '6': '26',
         '7': '25',
         '8': '24',
-        '9': '23'
+        '9': '23' # 2 HS and ambiguous as to where students are. impl elsewhere
     }
     return gradeDict[str(grade)]
 
@@ -134,8 +192,8 @@ def getContext(grade):
         '26': '26.Intermediate.Students.eUsers.ERCSD',
         '25': '25.MiddleSchools.Students.eUsers.ERCSD',
         '24': '24.MiddleSchools.Students.eUsers.ERCSD',
-        '23': '23.RHS.Students.eUsers.ERCSD',
-        'SVHS9': 'SVHS.Students.eUsers.ERCSD'
+        '23': '23.RHS.Students.eUsers.ERCSD', #HS is ambiguous, separate out
+        #'SVHS9': 'SVHS.Students.eUsers.ERCSD' to protect this function
     }
 
     return contextDict[gC]
@@ -159,11 +217,13 @@ def getTemplate(grade):
     pawg.drag(100, 0, .5)
     # click search button (590, 585)
     pawg.click(590, 585)
+    print("Done for now")
 
 
 def processRows(df=students):
-    for i in range(len(df.index)):
-        obj = df.iloc[i]
+    for entry in df.index:
+        print("process {}".format(entry))
+        obj = df.iloc[entry]
         if obj['ALREADY_EXISTED'] == 'NO':
             if obj['GRADE'] > 3:
                 notPrimary(obj)
@@ -171,8 +231,10 @@ def processRows(df=students):
                 isPrimary(obj)
             else:
                 print("obj not in grade range:\n{}".format(obj))
-        time.sleep(15)
-        return 0
+        pawg.click(936,15)
+        pawg.click(66,456)
+        #create user (66,456)
+        #close search window(936, 15)    
 
 def processSingleRow(df=students, rowNum=0):
     obj = df.iloc[rowNum]
@@ -183,26 +245,34 @@ def processSingleRow(df=students, rowNum=0):
             isPrimary(obj)
         else:
             print("obj not in grade range:\n{}".format(obj))
-    time.sleep(15)
+    
     return 0
 
-if __name__ == "__main__":
-    print(getPosition())
-    #processRows()
-    processSingleRow(rowNum=1)
+def teacherIsNull(teacher):
+    # "Search" tab (546,77)
+    pawg.click(546,77)
+    # Search field (432, 205)
+    pawg.click(432,205)
+    pawg.write(teacher)
+    # Search button (529, 416)
+    pawg.click(529, 416)
+    resp = input()
+    return resp
+    
+# Enter teacher list in here
+def checkTeachers():
+    teachers = ['bbarrow', 'nborno', 'oborno', 'sestevez', 'kgarcia', 'jgilles', 'sgilles', 'scelestin', 'mhenriquez', 'jhernandez', 'lkilkenny', 'glabaze', 'clouise', 'slugo', 'smcdonald', 'cmendez', 'mmend', 'pmores', 'cnorman', 'msewnath', 'jsimpson', 'cthomas']
+    teachFrame = pd.DataFrame(columns=[teachers, 'Exists?'])
+    for t in teachers:
+        teacherIsNull(t)
+        #time.sleep(3)
 
-    #usernameClick()
-    #time.sleep(3)
-    #fnameClick()
-    #time.sleep(3)
-    #lnameClick()
+    print(teachFrame)
+if __name__ == "__main__":
+    #print(getPosition())
+    #processRows()
+    #processSingleRow(rowNum=0)
+    '''for entry in students.index:
+        print(entry)
     '''
-    print(len(studentDict['STUDENT']))
-    print(len(studentDict['ID']))
-    print(len(studentDict['GRADE']))
-    print(students)
-    print(students.iloc[0])
-    print(students.iloc[0]['STUDENT'])
-    notPrimary()
-    #print(len(students.index))
-    '''
+    checkTeachers()
