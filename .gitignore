@@ -133,3 +133,7 @@ dmypy.json
 
 # local env
 networkingEnv/*
+myNetEnv/*
+
+meetingMinutes/*
+
